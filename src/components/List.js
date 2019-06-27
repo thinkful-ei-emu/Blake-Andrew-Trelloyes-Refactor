@@ -10,8 +10,11 @@ class List extends React.Component {
     const cards = this.props.cards.map(card => {
       return <Card
         key={card.id}
+        cardId={card.id}
         title={card.title}
         content={card.content}
+        listId={this.props.listId}
+        deleteById={this.props.deleteById}
       />
     });
     
