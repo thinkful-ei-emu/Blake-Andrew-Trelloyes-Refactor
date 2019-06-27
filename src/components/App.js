@@ -3,7 +3,7 @@ import '../styles/App.css';
 import List from './List';
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       lists: [
@@ -45,6 +45,22 @@ class App extends React.Component {
       }
     }
   }
+
+  addRandomCard = (listId) => {
+    const cardIds = this.state.lists[listId-1].cardIds;
+    const allCards = this.state.allCards;
+    const allCardIds = Object.keys(allCards);
+    const randomCardId = allCardIds[(Math.ceil(Math.random() * 12) - 1)];
+    const newCardIds = [...cardIds, randomCardId];
+
+    let listsCopy = this.state.lists;
+    listsCopy[listId-1].cardIds = newCardIds;
+    this.setState({
+      lists: listsCopy
+    });
+
+  }
+
   deleteById = (id, listId) => {
     console.log(`id : ${id}, listId : ${listId}`);
     const newCardIds = this.state.lists[listId-1].cardIds.filter(cardId => cardId !== id);
@@ -57,16 +73,17 @@ class App extends React.Component {
   
   render() {
     const store = this.state;
-    const lists = store.lists.map(list => {
-      const cards = list.cardIds.map(id => store.allCards[id]);
+    const lists = store.lists.map((list,index) => {
+      const cards = list.cardIds.map((id) => store.allCards[id]);
 
       return (
         <List
-          key={list.id}
+          key={index}
           listId={list.id}
           header={list.header}
           cards={cards}
           deleteById={this.deleteById}
+          addRandomCard={this.addRandomCard}
         />
       )
     });

@@ -2,10 +2,10 @@ import React from 'react';
 import '../styles/Card.css';
 
 class Card extends React.Component {
-handleDeleteClick = () => {
-  this.props.deleteById(this.props.cardId, this.props.listId);
-  //console.log(`id : ${this.props.cardId}, listId : ${this.props.listId}`);
-}
+  
+  handleDeleteClick = () => {
+    this.props.deleteById(this.props.cardId, this.props.listId);
+  }
 
   render() {
     return (

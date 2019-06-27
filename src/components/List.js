@@ -6,10 +6,14 @@ import Card from './Card';
 
 class List extends React.Component {
 
+  addRandomCard = () => {
+    this.props.addRandomCard(this.props.listId);
+  }
+
   render() {
-    const cards = this.props.cards.map(card => {
+    const cards = this.props.cards.map((card,index) => {
       return <Card
-        key={card.id}
+        key={index}
         cardId={card.id}
         title={card.title}
         content={card.content}
@@ -23,6 +27,7 @@ class List extends React.Component {
         <header className="List-header">
           <h2>{this.props.header}</h2>
         </header>
+        <button onClick={this.addRandomCard}>Add Random Card</button>
         <div className="List-cards">
           {cards}
         </div>
